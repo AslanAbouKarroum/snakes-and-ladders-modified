@@ -1,0 +1,253 @@
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 95%;
+    background: linear-gradient(to bottom, #6a1b9a, #283593); /* Deep purple gradient */
+    margin-top: -30%;
+}
+
+#game-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(to right, #f50057, #2196f3, #4caf50, #ffeb3b);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: textShine 5s ease-in-out infinite;
+    text-align: center;
+}
+
+#div_container{
+    position: relative;
+    width: 100%;
+    height: 53%;
+}
+
+/* image_container */
+#image_container {
+    position: absolute;
+    width: 100%; /* Take full width of parent */
+    height: 100%; /* Take full height of parent */
+    overflow: hidden; /* Prevent scrollbars if image is slightly larger */
+    z-index: 1;
+}
+#pic {
+    width: 100%; /* Image takes full width of its container */
+    height: 100%; /* Image takes full height of its container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    display: block; /* Prevents extra space below the image */
+}
+
+.container {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-shrink: initial;
+    /* background-image: url("https://raw.githubusercontent.com/adrianeyre/codewars/master/Ruby/Authored/snakesandladdersboard.jpg");
+     */
+    background-size: cover;
+    z-index: 1;
+}
+
+.insider{
+    color : black;
+    border: 20px;
+    border-color: black;
+    /* background-color: white; */
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#below_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: aliceblue;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#new_game_div{
+    display: flex;
+    justify-content: center;
+    /* margin-top: 1rem; */
+}
+
+#playerAndBtn{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    /* text-align: center; */
+    justify-content: space-between;
+    width: 100%;
+}
+
+#checkbox_div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 33.33%;
+}
+
+#play_hard_div{
+    margin-left: 1rem;
+}
+
+#two_players_div{
+    margin-left: 1rem;
+}
+
+#two_dice_div{
+    margin-left: 1rem;
+}
+
+#span_btn{
+    display: flex;
+    flex-direction: column;
+    width: 33.33%;
+    justify-content: center;
+    align-items: center;
+}
+
+#play {
+    margin-top: 0.9rem;
+    width: 50%;
+}
+
+#turn {
+    text-align: center;
+}
+
+#screen {
+    width: 33.33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dice {
+    width: 2rem;
+    height: 2rem;
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    user-select: none;
+    background-color: skyblue;
+    transition: transform 0.5s ease-in-out; /* Add transition for smooth roll */
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  .v{
+    visibility: hidden;
+  }
+  #dice.one {
+    display: grid;
+    place-items: center;
+  }
+
+  #dice.two {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+
+  #dice.three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+
+  #dice.four {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  #dice.five {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  #dice.six {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+    justify-items: center;
+    align-items: center;
+  }
+
+@media screen and (min-width: 360px){
+    #div_container{
+        width: 100%;
+        height: 46%;
+    }
+}
+
+@media screen and (min-width: 390px){
+    #div_container{
+        width: 100%;
+        height: 44%;
+    }
+}
+
+@media screen and (min-width: 720px){
+    body{
+        margin-top: 0%;
+    }
+
+    #div_container{
+        width: 100%;
+        height: 70%;
+    }
+}
+
+@media screen and (min-width: 820px){
+    body{
+        margin-top: 0%;
+    }
+
+    #div_container{
+        width: 100%;
+        height: 65%;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    body{
+        margin-top: 0%;
+    }
+
+    #div_container{
+        width: 95%;
+        height: 67%;
+    }
+}

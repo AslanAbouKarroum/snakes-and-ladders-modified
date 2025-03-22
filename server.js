@@ -19,6 +19,11 @@ app.get('/',(req, res)=>{
     res.sendFile(__dirname + '/public/index.html')
 })
 
+app.get('/play',(req, res)=>{
+    res.sendFile(__dirname + '/public/play.html')
+})
+
+
 app.post('/press',(req,res)=>{
     
 })

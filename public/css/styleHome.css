@@ -1,0 +1,24 @@
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 95%;
+    background: linear-gradient(to bottom, #6a1b9a, #283593); /* Deep purple gradient */
+    /* margin-top: -30%; */
+}
+
+#game-title-home {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(to right, #f50057, #2196f3, #4caf50, #ffeb3b);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: textShine 5s ease-in-out infinite;
+    text-align: center;
+}
+

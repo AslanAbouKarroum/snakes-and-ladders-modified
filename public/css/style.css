@@ -95,10 +95,48 @@ body{
 }
 
 #checkbox_div{
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 33.33%;
+}
+
+#checkbox_sub_div{
+    position: absolute;
+    z-index: 2;
+}
+
+#players{
+    position: absolute;
+    z-index: 1;
+    margin-top: -2rem;
+}
+
+.players-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 95%;
+    max-width: 400px;
+}
+
+.player-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px; */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.player-info-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #play_hard_div{
@@ -111,6 +149,7 @@ body{
 
 #two_dice_div{
     margin-left: 1rem;
+    margin-bottom: 0.9rem;
 }
 
 #span_btn{
@@ -124,6 +163,7 @@ body{
 #play {
     margin-top: 0.9rem;
     width: 50%;
+    margin-bottom: 0.9rem;
 }
 
 #turn {
@@ -133,8 +173,9 @@ body{
 #screen {
     width: 33.33%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    align-items: start;
+    
 }
 
 #dice {
@@ -150,6 +191,20 @@ body{
     transition: transform 0.5s ease-in-out; /* Add transition for smooth roll */
   }
 
+#dice2{
+    width: 2rem;
+    height: 2rem;
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    user-select: none;
+    background-color: skyblue;
+    transition: transform 0.5s ease-in-out; /* Add transition for smooth roll */
+    visibility: hidden;
+}
+
   .dot {
     width: 5px;
     height: 5px;
@@ -159,26 +214,26 @@ body{
   .v{
     visibility: hidden;
   }
-  #dice.one {
+  #dice.one ,#dice2.one{
     display: grid;
     place-items: center;
   }
 
-  #dice.two {
+  #dice.two , #dice2.two{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     align-items: center;
   }
 
-  #dice.three {
+  #dice.three , #dice2.three{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     align-items: center;
   }
 
-  #dice.four {
+  #dice.four , #dice2.four {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -187,7 +242,7 @@ body{
     align-items: center;
   }
 
-  #dice.five {
+  #dice.five , #dice2.five {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -196,7 +251,7 @@ body{
     align-items: center;
   }
 
-  #dice.six {
+  #dice.six ,#dice2.six{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);

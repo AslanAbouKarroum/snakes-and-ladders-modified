@@ -6,10 +6,10 @@ function SnakesLadders() {
     this.player2place = 1;      // second player place
     this.check=0;                // 0 to continue the game, 3 if player one win, 4 if player two win
     this.hard_bot_arr=[6,6,1,1,1,1]  // array for the hard mode that store the number of dice for the next 3 moves
-    this.hard_bot_index =0;          // index has 2 task first to get the right number on the dice and the second task is to let the bot choose randomly when the index is greater than the length of the array
+    this.hard_bot_index =0;          // index has 2 tasks first to get the right number on the dice and the second task is to let the bot choose randomly when the index is greater than the length of the array
     this.newGame_check = 0;          // if the user press new game when timeout function is occuring then the game will start itself because the timeout function will call the method
-    this.red_circle = 'assets/circle-clipart-colored-13.png';
-    this.blue_circle = 'assets/circle-clipart-colored-6.png';
+    this.red_circle = 'assets/red.png';
+    this.blue_circle = 'assets/blue.png';
     this.board = {   // convert the number from bottom of the ladder to the top and from the head of the snakes to the tail
         2:38,
         7:14,
@@ -159,11 +159,11 @@ function SnakesLadders() {
         two_dice_div.style.visibility= 'visible';
         two_players_div.style.visibility= 'visible';
         document.getElementById('play').removeAttribute('disabled');
-        document.getElementById("turn").textContent= 'Player 1';
+        document.getElementById("turn").textContent= player_name;
         playersInfoEl.style.visibility = 'hidden';
     };
     this.play = ()=>{  // called when playing with 2 dice and 2 players
-        if(this.check==3){ console.log( 'Player 1 Wins!');return 0}; // check if player 1 won
+        if(this.check==3){ console.log( player_name+' Wins!');return 0}; // check if player 1 won
         if(this.check==4){ console.log( 'Player 2 Wins!');return 0}; // check if player 2 won
         let die1 = Math.ceil(Math.random()*6)  // random number for the dice between 1 and 6
         let die2 = Math.ceil(Math.random()*6)
@@ -176,7 +176,7 @@ function SnakesLadders() {
                 //if(element) element.style['background-image'] = null;  // to turn the background off before leaving the palce
                 setTimeout(()=>{if(element) element.style['background-image'] = null},1500)
             }else{
-                if(element) element.style['background-image'] = `url(${this.blue_circle})`; // to turn the background by the opposit color before leaving (that was a glitch caused by the comming to the occupied place abd leaving it on the next turn before the opposit play(2 dice equal case))
+                setTimeout(()=>{if(element) element.style['background-image'] = `url(${this.blue_circle})`},1500) ;// to turn the background by the opposit color before leaving (that was a glitch caused by the comming to the occupied place abd leaving it on the next turn before the opposit play(2 dice equal case))
                 if(element)element.style['background-size']='cover';
             }
             if(die1!==die2){this.turn=2};     // to switch the turn if dice aren't the same and to not switching it if the dice has the same number
@@ -184,11 +184,11 @@ function SnakesLadders() {
             if(this.player1place==100){  // checking if the current player won  
                 this.turn=2;             // chanching the turn in case the dice are the same
                 this.check =3;           // changing the check 
-                console.log( 'Player 1 Wins!');
+                console.log( player_name+ ' Wins!');
             }else{           // normal cases
                 if(this.player1place>100) this.player1place = 100 -(this.player1place%100)  // bounce back above 100
                 if(this.board[this.player1place]) this.player1place = this.board[this.player1place]  // checking if the player lay on a snake head or a bottom of a ladder
-                console.log( 'Player 1 is on square '+this.player1place);
+                //console.log( 'Player 1 is on square '+this.player1place);
                 players[0].position = this.player1place;
                 setTimeout(renderPlayersInfo,1500);
             };
@@ -201,7 +201,7 @@ function SnakesLadders() {
                 //if(element2) element2.style['background-image'] = null;
                 setTimeout(()=>{if(element2) element2.style['background-image'] = null},1500)
             }else{
-                if(element2) element2.style['background-image'] = `url(${this.red_circle})`;
+                setTimeout(()=>{if(element2) element2.style['background-image'] = `url(${this.red_circle})`},1500);
                 if(element2)element2.style['background-size']='cover';
             }
             if(die1!==die2){this.turn=1};
@@ -221,10 +221,10 @@ function SnakesLadders() {
             setTimeout(()=>{if(element2_new) element2_new.style['background-image'] = `url(${this.blue_circle})`},1500)
             if(element2_new) element2_new.style['background-size']='cover';
         };
-        document.getElementById("turn").textContent= `Player ${this.turn}`;   // changing the player 2 above the play button on the user interface
+        setTimeout(()=>{document.getElementById("turn").textContent= `Player ${this.turn}`},1500);   // changing the player 2 above the play button on the user interface
     };
     this.bot = ()=>{   // called when playing one player and two dice
-        if(this.check==3){ console.log( 'Player 1 Wins!');return 0};
+        if(this.check==3){ console.log( player_name+' Wins!');return 0};
         if(this.check==4){ console.log( 'Player 2 Wins!');return 0};
         let die1 = Math.ceil(Math.random()*6)
         let die2 = Math.ceil(Math.random()*6)
@@ -237,7 +237,7 @@ function SnakesLadders() {
                 //if(element) element.style['background-image'] = null;
                 setTimeout(()=>{if(element) element.style['background-image'] = null},1500)
             }else{
-                if(element) element.style['background-image'] = `url(${this.blue_circle})`;
+                setTimeout(()=>{if(element) element.style['background-image'] = `url(${this.blue_circle})`},1500);
                 if(element)element.style['background-size']='cover';
             }
             if(die1!==die2){this.turn=2};
@@ -245,11 +245,11 @@ function SnakesLadders() {
             if(this.player1place==100){
                 this.turn=2;
                 this.check =3;
-                console.log( 'Player 1 Wins!');
+                console.log( player_name+' Wins!');
             }else{
                 if(this.player1place>100) this.player1place = 100 -(this.player1place%100) 
                 if(this.board[this.player1place]) this.player1place = this.board[this.player1place]
-                console.log( 'Player 1 is on square '+this.player1place);
+                //console.log( 'Player 1 is on square '+this.player1place);
                 players[0].position = this.player1place;
                 setTimeout(renderPlayersInfo,1500);
             };
@@ -259,9 +259,9 @@ function SnakesLadders() {
         }else if(this.turn==2){
             let element2 = document.getElementById(this.img[this.player2place]) || null;
             if(this.player2place!=this.player1place){
-                if(element2) element2.style['background-image'] = null;
+                setTimeout(()=>{if(element2) element2.style['background-image'] = null},1500);
             }else{
-                if(element2) element2.style['background-image'] = `url(${this.red_circle})`;
+                setTimeout(()=>{if(element2) element2.style['background-image'] = `url(${this.red_circle})`},1500);
                 if(element2)element2.style['background-size']='cover';
             }
             if(die1!==die2){this.turn=1};
@@ -282,18 +282,18 @@ function SnakesLadders() {
             if(element2_new) element2_new.style['background-size']='cover';
         };
         if(this.turn==2){
-            document.getElementById("turn").textContent= 'Bot'  
+            setTimeout(()=>{document.getElementById("turn").textContent= 'Bot'},1500);
         }else{
-            document.getElementById("turn").textContent= `Player ${this.turn}`;
+            setTimeout(()=>{document.getElementById("turn").textContent= `Player ${this.turn}`},1500);
         }
         if(this.turn==2) {
-            setTimeout(timeout_function, 2000);   // a 2 second wait so the bot doesn't play directly after the human player it's annoying beleive me
+            setTimeout(timeout_function, 3000);   // a 3 second wait so the bot doesn't play directly after the human player it's annoying beleive me
         };
         if(this.turn==2) document.querySelector('#play').setAttribute('disabled',true)  // to not let the user press the button during the bot turn
-        if(this.turn==1) document.querySelector('#play').removeAttribute('disabled')  // allowing the user to play after the bot finish its turn
+        setTimeout(()=>{if(this.turn==1) document.querySelector('#play').removeAttribute('disabled')},1500);  // allowing the user to play after the bot finish its turn
     };
     this.playOne =()=>{      // called when playing two players and one dice
-        if(this.check==3){ console.log( 'Player 1 Wins!');return 0};
+        if(this.check==3){ console.log( player_name+' Wins!');return 0};
         if(this.check==4){ console.log( 'Player 2 Wins!');return 0};
         let die1 = Math.ceil(Math.random()*6)
         console.log(die1)
@@ -301,10 +301,9 @@ function SnakesLadders() {
         if(this.turn==1){
             let element = document.getElementById(this.img[this.player1place]) || null;
             if(this.player2place!=this.player1place){
-                //if(element) element.style['background-image'] = null;
                 setTimeout(()=>{if(element) element.style['background-image'] = null;},1500)
             }else{
-                if(element) element.style['background-image'] = `url(${this.blue_circle})`;  // i can remove this else statement because there's one dice and the player can't have a second turn without the opposit play(no 2 dice equal case)
+                setTimeout(()=>{if(element) element.style['background-image'] = `url(${this.blue_circle})`},1500);  // i can remove this else statement because there's one dice and the player can't have a second turn without the opposit play(no 2 dice equal case)
                 if(element)element.style['background-size']='cover';
             }
             this.turn=2;
@@ -312,11 +311,11 @@ function SnakesLadders() {
             if(this.player1place==100){
                 this.turn=2;
                 this.check =3;
-                console.log( 'Player 1 Wins!');
+                console.log( player_name+' Wins!');
             }else{
                 if(this.player1place>100) this.player1place = 100 -(this.player1place%100) 
                 if(this.board[this.player1place]) this.player1place = this.board[this.player1place]
-                console.log( 'Player 1 is on square '+this.player1place);
+                //console.log( 'Player 1 is on square '+this.player1place);
                 players[0].position = this.player1place;
                 setTimeout(renderPlayersInfo,1500);
             };
@@ -326,10 +325,9 @@ function SnakesLadders() {
         }else if(this.turn==2){
             let element2 = document.getElementById(this.img[this.player2place]) || null;
             if(this.player2place!=this.player1place){
-                //if(element2) element2.style['background-image'] = null;
                 setTimeout(()=>{if(element2) element2.style['background-image'] = null},1500)
             }else{
-                if(element2) element2.style['background-image'] = `url(${this.red_circle})`;      // i can remove this else statement because there's one dice and the player can't have a second turn without the opposit play(no 2 dice equal case)
+                setTimeout(()=>{if(element2) element2.style['background-image'] = `url(${this.red_circle})`},1500);     // i can remove this else statement because there's one dice and the player can't have a second turn without the opposit play(no 2 dice equal case)
                 if(element2)element2.style['background-size']='cover';
             }
             this.turn=1;
@@ -349,10 +347,10 @@ function SnakesLadders() {
             setTimeout(()=>{if(element2_new) element2_new.style['background-image'] = `url(${this.blue_circle})`},1500)
             if(element2_new) element2_new.style['background-size']='cover';
         };
-        document.getElementById("turn").textContent= `Player ${this.turn}`;
+        setTimeout(()=>{document.getElementById("turn").textContent= `Player ${this.turn}`},1500);
     }
-    this.botOne= async ()=>{   // called when playing one player and one dice
-        if(this.check==3){ console.log( 'Player 1 Wins!');return 0};
+    this.botOne= ()=>{   // called when playing one player and one dice
+        if(this.check==3){ console.log( player_name +' Wins!');return 0};
         if(this.check==4){ console.log( 'Bot Wins!');return 0};
         let die1 = Math.ceil(Math.random()*6)
         console.log(die1)
@@ -360,10 +358,9 @@ function SnakesLadders() {
         if(this.turn==1){
             let element = document.getElementById(this.img[this.player1place]) || null;
             if(this.player2place!=this.player1place){
-                //if(element) element.style['background-image'] = null;
                 setTimeout(()=>{if(element) element.style['background-image'] =  null},1500)           
             }else{
-                if(element) element.style['background-image'] = `url(${this.blue_circle})`;
+                setTimeout(()=>{if(element) element.style['background-image'] = `url(${this.blue_circle})`},1500);
                 if(element)element.style['background-size']='cover';
             }
             this.turn=2;
@@ -371,26 +368,26 @@ function SnakesLadders() {
             if(this.player1place==100){
                 this.turn=2;
                 this.check =3;
-                console.log( 'Player 1 Wins!');
+                console.log( player_name+' Wins!');
+                setTimeout(()=>{playMp3('assets/winning.mp3')},1500);
             }else{
                 if(this.player1place>100) this.player1place = 100 -(this.player1place%100) 
                 if(this.board[this.player1place]) this.player1place = this.board[this.player1place]
-                console.log( 'Player 1 is on square '+this.player1place);
+                //console.log( 'Player 1 is on square '+this.player1place);
                 players[0].position = this.player1place;
                 setTimeout(renderPlayersInfo,1500);
             };
             let element_new = document.getElementById(this.img[this.player1place]) || null;
             setTimeout(()=>{if(element_new) element_new.style['background-image'] =  `url(${this.red_circle})`},1500)
-            //if(element) element.style['background-image'] =  `url(${this.red_circle})`;
             if(element_new) element_new.style['background-size']= 'cover';
         }else if(this.turn==2){
+            playMp3('/assets/roll_dice.mp3');
             let element2 = document.getElementById(this.img[this.player2place]) || null;
             if(this.player2place!=this.player1place){
-                //if(element2) element2.style['background-image'] = null;
                 setTimeout(()=>{if(element2) element2.style['background-image'] =  null},1500)
 
             }else{
-                if(element2) element2.style['background-image'] = `url(${this.red_circle})`;
+                setTimeout(()=>{if(element2) element2.style['background-image'] = `url(${this.red_circle})`},1500);
                 if(element2)element2.style['background-size']='cover';
             }
             this.turn=1;
@@ -399,6 +396,7 @@ function SnakesLadders() {
                 this.turn=1;
                 this.check =4;
                 console.log('Bot Wins!');
+                setTimeout(()=>{playMp3('assets/winning.mp3')},1500);
             }else{
                 if(this.player2place>100) this.player2place = 100 -(this.player2place%100) 
                 if(this.board[this.player2place]) this.player2place = this.board[this.player2place]
@@ -407,23 +405,22 @@ function SnakesLadders() {
                 setTimeout(renderPlayersInfo,1500);
             };
             let element2_new = document.getElementById(this.img[this.player2place]) || null;
-            //if(element2) element2.style['background-image'] = `url(${this.blue_circle})`;
             setTimeout(()=>{if(element2_new) element2_new.style['background-image'] =  `url(${this.blue_circle})`},1500);
             if(element2_new)element2_new.style['background-size']='cover';
         };
         if(this.turn==2){
-            document.getElementById("turn").textContent= 'Bot'  
+            setTimeout(()=>{document.getElementById("turn").textContent= 'Bot'},1500);  
         }else{
-            document.getElementById("turn").textContent= `Player ${this.turn}`;
+            setTimeout(()=>{document.getElementById("turn").textContent= `Player ${this.turn}`},1500);
         }
         if(this.turn==2) {
-            setTimeout(timeout_function, 2000);
+            setTimeout(timeout_function, 2500);
         };
         if(this.turn==2) document.querySelector('#play').setAttribute('disabled',true)
-        if(this.turn==1) document.querySelector('#play').removeAttribute('disabled')
+        setTimeout(()=>{if(this.turn==1) document.querySelector('#play').removeAttribute('disabled')},1500);
     }
     this.hard=()=>{    // called when playing against hard opponent, here the bot will arrive to the cell 84 in 2 turns (3 moves) and have a move in hand (2 dice equal case)
-        if(this.check==3){ console.log( 'Player 1 Wins!');return 0};
+        if(this.check==3){ console.log( player_name+' Wins!');return 0};
         if(this.check==4){ console.log( 'Bot Wins!');return 0};
         if(this.turn==1){
             let die1 = Math.ceil(Math.random()*6)
@@ -433,10 +430,9 @@ function SnakesLadders() {
             this.roll_dice2(die2)
             let element = document.getElementById(this.img[this.player1place]) || null;
             if(this.player2place!=this.player1place){
-                //if(element) element.style['background-image'] = null;
                 setTimeout(()=>{if(element) element.style['background-image'] = null},1500);
             }else{
-                if(element) element.style['background-image'] = `url(${this.blue_circle})`;
+                setTimeout(()=>{if(element) element.style['background-image'] = `url(${this.blue_circle})`},1500);
                 if(element)element.style['background-size']='cover';
             }
             if(die1!==die2){this.turn=2};
@@ -444,11 +440,11 @@ function SnakesLadders() {
             if(this.player1place==100){
                 this.turn=2;
                 this.check =3;
-                console.log( 'Player 1 Wins!');
+                console.log( player_name+' Wins!');
             }else{
                 if(this.player1place>100) this.player1place = 100 -(this.player1place%100) 
                 if(this.board[this.player1place]) this.player1place = this.board[this.player1place]
-                console.log( 'Player 1 is on square '+this.player1place);
+                //console.log( 'Player 1 is on square '+this.player1place);
                 players[0].position = this.player1place;
             };
             let element_new = document.getElementById(this.img[this.player1place]) || null;
@@ -470,10 +466,9 @@ function SnakesLadders() {
             this.roll_dice2(die2);
             let element2 = document.getElementById(this.img[this.player2place]) || null;
             if(this.player2place!=this.player1place){
-                //if(element2) element2.style['background-image'] = null;
                 setTimeout(()=>{if(element2) element2.style['background-image'] = null},1500)
             }else{
-                if(element2) element2.style['background-image'] = `url(${this.red_circle})`;
+                setTimeout(()=>{if(element2) element2.style['background-image'] = `url(${this.red_circle})`},1500);
                 if(element2)element2.style['background-size']='cover';
             }
             if(die1!==die2){this.turn=1};
@@ -494,12 +489,12 @@ function SnakesLadders() {
             if(element2_new) element2_new.style['background-size']='cover';
         };
         if(this.turn==2){
-            document.getElementById("turn").textContent= 'Bot'  
+            setTimeout(()=>{document.getElementById("turn").textContent= 'Bot'},1500);
         }else{
-            document.getElementById("turn").textContent= `Player ${this.turn}`;
+            setTimeout(()=>{document.getElementById("turn").textContent= `Player ${this.turn}`},1500);
         }
         if(this.turn==2) {
-            setTimeout(timeout_function, 2000);
+            setTimeout(timeout_function, 2500);
         };
         if(this.turn==2) document.querySelector('#play').setAttribute('disabled',true)
         if(this.turn==1) document.querySelector('#play').removeAttribute('disabled')
@@ -557,6 +552,7 @@ function SnakesLadders() {
 
 let game = new SnakesLadders 
 
+
 const play_hard_checkbox = document.querySelector('#play_hard');
 const two_players_checkbox = document.querySelector("#two_players");
 const two_dice_checkbox = document.querySelector("#two_dice");
@@ -564,9 +560,10 @@ const new_game = document.querySelector('#new_game');
 const dice = document.getElementById('dice');
 const dice2 = document.getElementById('dice2');
 
-
-function play_now(){       // called when the play button is clicked on
+async function play_now(){       // called when the play button is clicked on
     game.newGame_check = 0;   // to reset the check button to start playing normally
+   // playSound();
+   playMp3('/assets/roll_dice.mp3');
     const checkbox_div = document.getElementById('checkbox_div');
     const two_dice_div = document.getElementById('two_dice_div');
     const two_players_div = document.getElementById('two_players_div');
@@ -626,10 +623,25 @@ function show_second_dice(){
     }
 }
 
-let players = [
-    { name: 'Player 1', position: 1, color: 'red' },
-    { name: 'Player 2', position: 1, color: 'blue' },
-];
+
+let players;
+let player_name ='';
+let bot = 'Bot';
+
+let player_input= document.getElementById('turn');
+ if(player_input)setTimeout(()=>{player_name = player_input.innerText},1000)
+//  setTimeout(()=>{console.log(player_name)},1500)
+function change_bot(){
+    if(two_players_checkbox.checked){
+        players[1].name = 'Player 2'
+    }else{
+        players[1].name = 'Bot'
+    }
+}
+setTimeout(()=>{players= [
+    { name: player_name, position: 1, color: 'red' },
+    { name: bot, position: 1, color: 'blue' },
+]},2000);
 
 const playersInfoEl = document.getElementById('players')
 const renderPlayersInfo = () => {
@@ -639,27 +651,96 @@ const renderPlayersInfo = () => {
         playerInfoDiv.classList.add('player-info');
         playerInfoDiv.innerHTML = `
             <div class="player-info-name">
-                <div class="player-color" style="background-color: ${player.color}"></div>
-                <span>${player.name}</span>
+                <div class="player-color" style="color: ${player.color}"></div>
+                <span class = player_name>${player.name}</span>
             </div>
-            <div>Position: <span class="position">${player.position}</span></div>
+            <div> Position: <span class="position">${player.position}</span></div>
         `;
         playersInfoEl.appendChild(playerInfoDiv);
     });
 };
 
-window.onload = ()=>{
-    renderPlayersInfo()
+function game_won(){
+    playersInfoEl.innerHTML = '';
+    const playerWon = document.createElement('div');
+    if(game.check==3){
+        playerWon.innerHTML = player_name +' WON!'
+        playMp3('/assets/winning.mp3')
+    }if(game.check==4){
+        playerWon.innerHTML = bot +' WON!'
+    }
+    playersInfoEl.appendChild(playerWon);
+}
+
+async function playMp3(filePath) {
+    try {
+      const audioContext = new AudioContext();
+      const response = await fetch(filePath);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  
+      // Create a buffer source and play the audio.
+      const source = audioContext.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioContext.destination);
+      source.start();
+  
+      // Optionally, you can handle the "ended" event:
+    //   source.onended = () => {
+    //     console.log('MP3 playback finished.');
+    //   };
+  
+    } catch (error) {
+      console.error('Error playing MP3:', error);
+    }
+  }
+
+const play_button = document.getElementById('playButton');
+
+if (play_button) {
+    play_button.addEventListener('click', async (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const nameInput = document.getElementById('nameInput');
+        const userName = nameInput.value;
+        try {
+            const response = await fetch('/play', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `name=${encodeURIComponent(userName)}`,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                window.location.href = data.redirect;
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+
+
+if(playersInfoEl)window.onload = ()=>{
+    setTimeout(()=>{renderPlayersInfo()},2100);
     playersInfoEl.style.visibility = 'hidden';
 }
 
-new_game.addEventListener('click', game.newGame);
 
-play_hard_checkbox.addEventListener('change',hide_other_options);
 
-two_dice_checkbox.addEventListener('change',show_second_dice)
+if(new_game)new_game.addEventListener('click', game.newGame);
 
-document.querySelector('#play').addEventListener('click', play_now);
+if(play_hard_checkbox)play_hard_checkbox.addEventListener('change',hide_other_options);
+
+if(two_dice_checkbox)two_dice_checkbox.addEventListener('change',show_second_dice);
+
+if(two_players_checkbox)two_players_checkbox.addEventListener('click',change_bot)
+
+const play_now_var = document.querySelector('#play');
+if(play_now_var) play_now_var.addEventListener('click', play_now);
 
 
 

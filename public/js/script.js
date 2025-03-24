@@ -690,10 +690,10 @@ function game_won(){
     const playerWon = document.createElement('div');
     playerWon.id = 'won';
     if(game.check==3){
-        playerWon.innerHTML = player_name +' WON!';
+        setTimeout(()=>{playerWon.innerHTML = player_name +' WON!'},500);
         playMp3('/assets/winning.mp3');
     }if(game.check==4){
-        playerWon.innerHTML = bot +' Won!';
+        setTimeout(()=>{playerWon.innerHTML = bot +' Won!'},500);
     };
     playerWon.style.position = 'absolute';
     playerWon.style['z-index'] = '3';

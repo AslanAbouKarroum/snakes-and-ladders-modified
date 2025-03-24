@@ -6,7 +6,7 @@ body{
     height: 100%;
     width: 95%;
     background: linear-gradient(to bottom, #6a1b9a, #283593); /* Deep purple gradient */
-    margin-top: -30%;
+    margin-top: -10%;
 }
 
 #game-title {
@@ -37,9 +37,9 @@ body{
     z-index: 1;
 }
 #pic {
-    width: 100%; /* Image takes full width of its container */
+    width:  100%; /* Image takes full width of its container */
     height: 100%; /* Image takes full height of its container */
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    object-fit: fill; /* Maintain aspect ratio and cover the container */
     display: block; /* Prevents extra space below the image */
 }
 
